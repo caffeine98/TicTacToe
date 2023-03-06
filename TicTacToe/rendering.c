@@ -13,7 +13,6 @@ static void render_draw_circle(SDL_Renderer* renderer, float x, float y, float r
 		int y_point = sin(i) * radius;
 		SDL_RenderDrawPoint(renderer, x + x_point, y + y_point);
 	}
-	SDL_RenderDrawPoint(renderer, x + radius, y);
 }
 
 void render_grid(SDL_Renderer* renderer, SDL_Color* color) {
