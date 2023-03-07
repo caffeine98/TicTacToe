@@ -7,10 +7,10 @@ const SDL_Color TIE_COLOR = { .r = 112, .g = 128, .b = 144, .a = 255 };
 const SDL_Color GRID_COLOR = { .r = 255, .g = 255, .b = 255, .a = 255 };
 
 static void render_draw_circle(SDL_Renderer* renderer, float x, float y, float radius) {
-	const int number_of_points = 360;
-	for (int i = 0; i < number_of_points; i++) {
-		int x_point = cos(i) * radius;
-		int y_point = sin(i) * radius;
+	const double arc_length = 2 * M_PI;
+	for (double i = 0; i < arc_length; i += 0.01) {
+		double x_point = cos(i) * radius;
+		double y_point = sin(i) * radius;
 		SDL_RenderDrawPoint(renderer, x + x_point, y + y_point);
 	}
 }
@@ -31,20 +31,20 @@ void render_x(SDL_Renderer* renderer, int row, int column, const SDL_Color* colo
 	const float center_x = CELL_WIDTH * 0.5 + row * CELL_HEIGHT;
 	const float center_y = CELL_HEIGHT * 0.5 + column * CELL_WIDTH;
 	SDL_SetRenderDrawColor(renderer, color->r, color->g, color->b, color->a);
+
 	// Draw lines to produce X 
 	// Draw first line
 	SDL_RenderDrawLine(renderer, 
-						center_x - half_cell_side,
-						center_y - half_cell_side,
-						center_x + half_cell_side,
-						center_y + half_cell_side);
+		center_x - half_cell_side,
+		center_y - half_cell_side,
+		center_x + half_cell_side,
+		center_y + half_cell_side);
 	// Draw Second line
 	SDL_RenderDrawLine(renderer, 
-						center_x + half_cell_side,
-						center_y - half_cell_side,
-						center_x - half_cell_side,
-						center_y + half_cell_side);
-
+		center_x + half_cell_side,
+		center_y - half_cell_side,
+		center_x - half_cell_side,
+		center_y + half_cell_side);
 }
 
 void render_o(SDL_Renderer* renderer, int row, int column, const SDL_Color* color) {
